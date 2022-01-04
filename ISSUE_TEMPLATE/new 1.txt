@@ -1,0 +1,20 @@
+      <?php
+               include "config.php"; //load in any variables
+               $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+           
+               if (mysqli_connect_errno()) {
+                   echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
+                   exit; //stop processing the page further
+               };
+                $resultSet = $DBC->query("SELECT roomname from room");
+               ?>
+               <select name="roomname">
+              <?php
+                 while($rows = $resultSet->fetch_assoc())
+                 { 
+                    $roomname = $rows['roomname'];
+                    echo "<option value='$roomname'>$roomname</option>";
+                 }
+              ?>
+              
+              </select>
